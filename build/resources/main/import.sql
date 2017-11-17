@@ -1,1 +1,1 @@
-INSERT INTO USER (ID, PASSWORD, PSEUDO) VALUES (1, 'robin.camarasa', 'p8hmbk8!');
+INSERT INTO USER (ID, PSEUDO, PASSWORD) VALUES (1, 'robin.camarasa', 'p8hmbk8!');
