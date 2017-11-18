@@ -1,5 +1,6 @@
 package com.robin.camarasa.nutritvecoach.web;
 
+import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
 
 
@@ -8,11 +9,13 @@ public class UserDto {
     private final Long id;
     private final String pseudo;
     private final String password;
+    private final PhysicalData physicalData;
 
     public UserDto(User user) {
         this.id = user.getId();
         this.pseudo = user.getPseudo();
         this.password = user.getPassword();
+        this.physicalData = user.getPhysicalData();
     }
 
     public Long getId() {
@@ -25,5 +28,9 @@ public class UserDto {
 
     public String getStatus() {
         return password;
+    }
+
+    public PhysicalData getPhysicalData() {
+        return physicalData;
     }
 }

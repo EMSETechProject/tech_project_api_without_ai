@@ -15,6 +15,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private PhysicalData physicalData;
+
     @SuppressWarnings("unused")
     public User() {
     }
@@ -36,6 +39,10 @@ public class User {
         return pseudo;
     }
 
+    public PhysicalData getPhysicalData() {
+        return physicalData;
+    }
+
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
@@ -48,4 +55,7 @@ public class User {
         this.password = password;
     }
 
+    public void setPhysicalData(PhysicalData physicalData) {
+        this.physicalData = physicalData;
+    }
 }

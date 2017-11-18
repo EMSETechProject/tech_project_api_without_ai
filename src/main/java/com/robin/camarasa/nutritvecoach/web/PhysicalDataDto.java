@@ -10,14 +10,12 @@ public class PhysicalDataDto {
     private final Float weight;
     private final Float size;
     private final Integer age;
-    private final User user;
 
     public PhysicalDataDto(PhysicalData physicalData) {
         this.id = physicalData.getId();
         this.weight = physicalData.getWeight();
         this.size = physicalData.getSize();
         this.age = physicalData.getAge();
-        this.user = physicalData.getUser();
     }
 
     public Float getSize() {
@@ -30,10 +28,6 @@ public class PhysicalDataDto {
 
     public Long getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public Integer getAge() {

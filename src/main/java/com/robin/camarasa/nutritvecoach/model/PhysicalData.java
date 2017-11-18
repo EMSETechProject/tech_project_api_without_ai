@@ -18,9 +18,6 @@ public class PhysicalData {
     @Column(nullable = false)
     private Integer age;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private User user;
-
     @SuppressWarnings("unused")
     public PhysicalData() {
     }
@@ -29,7 +26,6 @@ public class PhysicalData {
         this.age = age;
         this.weight = weight;
         this.size = size;
-        this.user = user;
     }
 
     public Float getSize() {
@@ -42,10 +38,6 @@ public class PhysicalData {
 
     public Long getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public Integer getAge() {
@@ -66,10 +58,6 @@ public class PhysicalData {
 
     public void setWeight(Float weight) {
         this.weight = weight;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
 }
