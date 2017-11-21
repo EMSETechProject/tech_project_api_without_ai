@@ -5,6 +5,7 @@ import com.robin.camarasa.nutritvecoach.model.Food;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodDaoImp implements FoodDaoCustom {
@@ -12,9 +13,9 @@ public class FoodDaoImp implements FoodDaoCustom {
     private EntityManager em;
 
     @Override
-    public List<Food> getCategories() {
-        String jpql = "select fd from Food fd";
-        TypedQuery<Food> query = em.createQuery(jpql, Food.class);
-        return query.getResultList();
+    public List<String> getCategories() {
+        String jpql = "SELECT fd.categorie FROM Food fd";
+        List<String> result = (ArrayList<String>)em.createQuery(jpql).getResultList();
+        return result;
     }
 }

@@ -3,13 +3,14 @@ package com.robin.camarasa.nutritvecoach.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Food")
 @SuppressWarnings("serial")
 public class Food {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "categorie")
     private String categorie;
 
 
