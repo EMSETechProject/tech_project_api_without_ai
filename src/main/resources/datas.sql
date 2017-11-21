@@ -1,9 +1,3 @@
-INSERT INTO PHYSICAL_DATA (ID, WEIGHT, AGE, SIZE) VALUES (1, 75.0, 21, 1.87);
-INSERT INTO USER (ID, PHYSICAL_DATA_ID, PSEUDO, PASSWORD) VALUES (1, 1, 'robin.camarasa', 'p8hmbk8!');
-
-INSERT INTO PHYSICAL_DATA (ID, WEIGHT, AGE, SIZE) VALUES (2, 63.0, 21, 1.67);
-INSERT INTO USER (ID, PHYSICAL_DATA_ID, PSEUDO, PASSWORD) VALUES (2, 2, 'mathilde.matly', 'onsenfiche');
-
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Farines et amidons','Fécule de pomme de terre',348,12.7,0,0,86.3,0.2,0,0,0.55,0,0,0.039,0.0095,0.11,0,0.0094,27.5)
 
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Farines et amidons','Flocon d avoine',367,10.1,13.3,14.2,57.9,6.51,0.97,56.9,10.2,0,0,1.13,2.08,2.5,0,0.014,84.3)

@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 public class PhysicalDataController {
 
     private final PhysicalDataDao physicalDataDao;
-
+    private PhysicalData physicalData;
 
     public PhysicalDataController(PhysicalDataDao physicalDataDao) {
         this.physicalDataDao = physicalDataDao;
@@ -23,5 +23,12 @@ public class PhysicalDataController {
     @GetMapping(value = "/{physicalDataId}")
     public PhysicalDataDto get(@PathVariable Long physicalDataId) {
         return (new PhysicalDataDto(physicalDataDao.getOne(physicalDataId)));
+    }
+
+    @PostMapping(value = "/add/{age}/{size}/{weight}")
+    public PhysicalDataDto add(@PathVariable Integer age, @PathVariable Float size, @PathVariable Float weight) {
+        physicalData = new PhysicalData(age,weight,size);
+        physicalDataDao.save(physicalData);
+        return (new PhysicalDataDto(physicalData));
     }
 }

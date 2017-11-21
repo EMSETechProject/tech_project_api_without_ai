@@ -1,5 +1,7 @@
 package com.robin.camarasa.nutritvecoach.model;
 
+import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,9 +24,10 @@ public class User {
     public User() {
     }
 
-    public User(String pseudo, String password) {
+    public User(String pseudo, String password, PhysicalData physicalData) {
         this.password = password;
         this.pseudo = pseudo;
+        this.physicalData = physicalData;
     }
 
     public Long getId() {

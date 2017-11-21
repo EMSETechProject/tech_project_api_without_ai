@@ -22,7 +22,7 @@ public class PhysicalData {
     public PhysicalData() {
     }
 
-    public PhysicalData(Integer age, Float weight, Float size, User user) {
+    public PhysicalData(Integer age, Float weight, Float size) {
         this.age = age;
         this.weight = weight;
         this.size = size;
