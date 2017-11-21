@@ -1,6 +1,7 @@
-package com.robin.camarasa.nutritvecoach.web;
+package com.robin.camarasa.nutritvecoach.web.Controller;
 
 import com.robin.camarasa.nutritvecoach.dao.FoodDao;
+import com.robin.camarasa.nutritvecoach.web.dto.FoodDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;

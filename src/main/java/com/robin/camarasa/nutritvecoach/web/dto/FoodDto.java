@@ -1,4 +1,4 @@
-package com.robin.camarasa.nutritvecoach.web;
+package com.robin.camarasa.nutritvecoach.web.dto;
 
 import com.robin.camarasa.nutritvecoach.model.Food;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;

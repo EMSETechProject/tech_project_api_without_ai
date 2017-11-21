@@ -1,18 +1,13 @@
-package com.robin.camarasa.nutritvecoach.web;
+package com.robin.camarasa.nutritvecoach.web.Controller;
 
 import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/users")

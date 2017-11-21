@@ -1,9 +1,8 @@
-package com.robin.camarasa.nutritvecoach.web;
+package com.robin.camarasa.nutritvecoach.web.Controller;
 
 import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
-import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
-import com.robin.camarasa.nutritvecoach.model.User;
+import com.robin.camarasa.nutritvecoach.web.dto.PhysicalDataDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;

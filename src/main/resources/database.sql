@@ -1,9 +1,3 @@
-INSERT INTO PHYSICAL_DATA (ID, WEIGHT, AGE, SIZE) VALUES (1, 75.0, 21, 1.87);
-INSERT INTO USER (ID, PHYSICAL_DATA_ID, PSEUDO, PASSWORD) VALUES (1, 1, 'robin.camarasa', 'p8hmbk8!');
-
-INSERT INTO PHYSICAL_DATA (ID, WEIGHT, AGE, SIZE) VALUES (2, 63.0, 21, 1.67);
-INSERT INTO USER (ID, PHYSICAL_DATA_ID, PSEUDO, PASSWORD) VALUES (2, 2, 'mathilde.matly', 'onsenfiche');
-
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES (﻿'Farines et amidons','Fécule de pomme de terre',348,12.7,0,0,86.3,0.2,0,0,0.55,0,0,0.039,0.0095,0.11,0,0.0094,27.5);
 
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Farines et amidons','Flocon davoine',367,10.1,13.3,14.2,57.9,6.51,0.97,56.9,10.2,0,0,1.13,2.08,2.5,0,0.014,84.3);
@@ -5285,5 +5279,6 @@ INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,gluc
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Boissons végétales type laits végétaux','Boisson au soja nature enrichie en calcium',44.2,90.8,3.42,3.75,2.18,2.05,2.18,0.35,1,0,0,0.26,0.39,1,0.7,0.097,98);
 
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Boissons végétales type laits végétaux','Boisson au soja aromatisée sucrée',60.5,86.8,2.96,3.25,7.24,1.92,6.72,0.35,0.6,0,0,0.3,0.38,0.85,0.7,0.12,12);
+
 INSERT INTO FOOD (categorie,intitule,energie,eau,proteines,proteines_brutes,glucides,lipides,sucres,amidon,fibres,alcool,acides_organiques,satures,monoinsatures,polyinsatures,cholesterol,sel,calcium) VALUES ('Boissons végétales type laits végétaux','Boisson au soja et jus de fruits concentrés',46.9,0,1.1,1.1,9.5,0.5,5.8,0,0,0,0,0,0.13,0.33,0.5,0.22,0);
 
