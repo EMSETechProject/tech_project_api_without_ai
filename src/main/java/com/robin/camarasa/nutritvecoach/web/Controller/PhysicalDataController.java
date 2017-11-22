@@ -3,6 +3,7 @@ package com.robin.camarasa.nutritvecoach.web.Controller;
 import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.web.dto.PhysicalDataDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,7 @@ public class PhysicalDataController {
     }
 
     @PostMapping(value = "/add/{age}/{size}/{weight}")
+    @ResponseStatus(HttpStatus.CREATED)
     public PhysicalDataDto add(@PathVariable Integer age, @PathVariable Float size, @PathVariable Float weight) {
         physicalData = new PhysicalData(age,weight,size);
         physicalDataDao.save(physicalData);

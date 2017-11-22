@@ -13,16 +13,20 @@ public class FoodCooking {
     @Column(nullable = false)
     private Float weight;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @ManyToOne
     private Food food;
+
+    @ManyToOne
+    private Recipe recipe;
 
     @SuppressWarnings("unused")
     public FoodCooking() {
     }
 
-    public FoodCooking(Float weight, Food food) {
+    public FoodCooking(Float weight, Food food, Recipe recipe) {
         this.weight = weight;
         this.food = food;
+        this.recipe = recipe;
     }
 
     public Long getId() {
@@ -37,8 +41,8 @@ public class FoodCooking {
         return weight;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
     public void setId(Long id) {
@@ -47,5 +51,13 @@ public class FoodCooking {
 
     public void setWeight(Float weight) {
         this.weight = weight;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

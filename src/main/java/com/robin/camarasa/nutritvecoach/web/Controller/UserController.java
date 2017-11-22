@@ -5,6 +5,7 @@ import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
 import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -32,6 +33,7 @@ public class UserController {
 
 
     @PostMapping(value = "/initialisepassword/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserDto initialisePassword(@PathVariable Long userId) {
         User user = userDao.getOne(userId);
         user.setPassword("greiui78@");
@@ -39,6 +41,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{physicalid}")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long physicalid) {
         physicalData = physicalDataDao.getOne(physicalid);
         user = new User(pseudo,password,physicalData);

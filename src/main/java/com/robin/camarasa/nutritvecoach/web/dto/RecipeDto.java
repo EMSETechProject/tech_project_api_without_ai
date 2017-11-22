@@ -11,20 +11,14 @@ public class RecipeDto {
 
     private final Long id;
     private final String name;
-    private final List<FoodCooking> foodCookings;
 
     public RecipeDto(Recipe recipe) {
         this.id = recipe.getId();
         this.name = recipe.getName();
-        this.foodCookings = recipe.getFoodCookings();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public List<FoodCooking> getFoodCookings() {
-        return foodCookings;
     }
 
     public String getName() {
