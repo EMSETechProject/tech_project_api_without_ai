@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/recipes")
@@ -26,6 +28,11 @@ public class RecipeController {
         this.recipeDao = recipeDao;
         this.foodCookingDao = foodCookingDao;
         this.foodDao = foodDao;
+    }
+
+    @GetMapping(value = "/all")
+    public List<RecipeDto> getallrecipes() {
+        return recipeDao.findAll().stream().map(RecipeDto::new).collect(Collectors.toList());
     }
 
     @PostMapping(value = "/add/{name}")
