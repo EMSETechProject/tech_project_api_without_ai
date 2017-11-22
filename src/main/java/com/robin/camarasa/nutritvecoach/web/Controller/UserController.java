@@ -32,21 +32,11 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/initialisepassword/{userId}")
+    @PostMapping(value = "/add/{pseudo}/{password}/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto initialisePassword(@PathVariable Long userId) {
-        User user = userDao.getOne(userId);
-        user.setPassword("greiui78@");
-        return (new UserDto(user));
-    }
-
-    @PostMapping(value = "/add/{pseudo}/{password}/{physicalid}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long physicalid) {
-        physicalData = physicalDataDao.getOne(physicalid);
-        user = new User(pseudo,password,physicalData);
+    public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
+        User user = new User(pseudo,password,physicalDataDao.findOne(id));
         userDao.save(user);
         return (new UserDto(user));
     }
-
 }

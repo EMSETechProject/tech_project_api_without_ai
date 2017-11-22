@@ -12,7 +12,6 @@ public class Food {
     @Column(nullable = false)
     private String categorie;
 
-
     @Column(nullable = false)
     private String intitule;
 

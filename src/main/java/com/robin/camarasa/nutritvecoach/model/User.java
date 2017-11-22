@@ -17,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @ManyToOne
     private PhysicalData physicalData;
 
     @SuppressWarnings("unused")

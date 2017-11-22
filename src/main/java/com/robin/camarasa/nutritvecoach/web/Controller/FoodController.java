@@ -39,6 +39,7 @@ public class FoodController {
         return selectfoodcat(cat,foodDao.findAll());
     }
 
+
     public List<FoodnameDto> selectfoodcat(String foodcatDto, List<Food> foods) {
         List<FoodnameDto> res = new ArrayList<>();
         for (int i = 0 ; i < foods.size() ; i++) {
