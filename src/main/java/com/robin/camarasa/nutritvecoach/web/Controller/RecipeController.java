@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,4 +51,36 @@ public class RecipeController {
         foodCookingDao.save(foodCooking);
         return (new FoodCookingDto(foodCooking));
     }
+
+    @GetMapping(value = "/{name}")
+    public List<FoodCookingDto> getRecipeIngredient(@PathVariable String name) {
+        List<FoodCookingDto> auxfCd = foodCookingDao.findAll().stream().map(FoodCookingDto::new).collect(Collectors.toList());
+        return getfoodcooking(getIdRecipe(name),auxfCd);
+    }
+
+    @GetMapping(value = "/test/{name}")
+    public Long getRecipeIngredient1(@PathVariable String name) {
+        return getIdRecipe(name);
+    }
+
+    public Long getIdRecipe(String name) {
+        List<Recipe> recipeDtos = recipeDao.findAll();
+        for(int i = 0 ; i < recipeDtos.size() ; i++) {
+            if (recipeDtos.get(i).getName().equalsIgnoreCase(name)) {
+                return recipeDtos.get(i).getId();
+            }
+        }
+        return new Long(-1);
+    }
+
+    public List<FoodCookingDto> getfoodcooking(Long id, List<FoodCookingDto> foodCookingDtos) {
+        List<FoodCookingDto> res = new ArrayList<>();
+        for (int i = 0 ; i < res.size() ; i++) {
+            if (foodCookingDtos.get(i).getId() == id) {
+                res.add(foodCookingDtos.get(i));
+            }
+        }
+        return res;
+    }
+
 }

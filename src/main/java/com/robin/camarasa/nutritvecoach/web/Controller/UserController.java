@@ -4,11 +4,15 @@ import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
+import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
 import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -29,6 +33,11 @@ public class UserController {
     @GetMapping(value = "/{userId}")
     public UserDto get(@PathVariable Long userId) {
         return (new UserDto(userDao.getOne(userId)));
+    }
+
+    @GetMapping(value = "/all")
+    public List<UserDto> getall() {
+        return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
     }
 
 
