@@ -11,10 +11,12 @@ public class RecipeDto {
 
     private final Long id;
     private final String name;
+    private final Long type;
 
     public RecipeDto(Recipe recipe) {
         this.id = recipe.getId();
         this.name = recipe.getName();
+        this.type = recipe.getType();
     }
 
     public Long getId() {
@@ -23,5 +25,9 @@ public class RecipeDto {
 
     public String getName() {
         return name;
+    }
+
+    public Long getType() {
+        return type;
     }
 }

@@ -13,12 +13,16 @@ public class Recipe {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private Long type;
+
     @SuppressWarnings("unused")
     public Recipe() {
     }
 
-    public Recipe(String name) {
+    public Recipe(String name, Long type) {
         this.name = name;
+        this.type = type;
     }
 
     public Long getId() {
@@ -29,6 +33,10 @@ public class Recipe {
         return name;
     }
 
+    public Long getType() {
+        return type;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -37,4 +45,7 @@ public class Recipe {
         this.id = id;
     }
 
+    public void setType(Long type) {
+        this.type = type;
+    }
 }

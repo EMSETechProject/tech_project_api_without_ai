@@ -3,9 +3,11 @@ package com.robin.camarasa.nutritvecoach.web.Controller;
 import com.robin.camarasa.nutritvecoach.dao.FoodCookingDao;
 import com.robin.camarasa.nutritvecoach.dao.FoodDao;
 import com.robin.camarasa.nutritvecoach.dao.RecipeDao;
+import com.robin.camarasa.nutritvecoach.model.Food;
 import com.robin.camarasa.nutritvecoach.model.FoodCooking;
 import com.robin.camarasa.nutritvecoach.model.Recipe;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
+import com.robin.camarasa.nutritvecoach.web.dto.FoodDto;
 import com.robin.camarasa.nutritvecoach.web.dto.RecipeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,31 +38,36 @@ public class RecipeController {
         return recipeDao.findAll().stream().map(RecipeDto::new).collect(Collectors.toList());
     }
 
-    @PostMapping(value = "/add/{name}")
+    @PostMapping(value = "/add/{name}/{type}")
     @ResponseStatus(HttpStatus.CREATED)
-    public RecipeDto addRecipe(@PathVariable String name) {
-        Recipe recipe = new Recipe(name);
+    public RecipeDto addRecipe(@PathVariable String name, @PathVariable Long type) {
+        Recipe recipe = new Recipe(name,type);
         recipeDao.save(recipe);
         return (new RecipeDto(recipe));
     }
 
-    @PostMapping(value = "/addingredient/{id_recipe}/{id_food}/{quantity}")
+    @PostMapping(value = "/addingredient/{id_recipe}/{food}/{quantity}")
     @ResponseStatus(HttpStatus.CREATED)
-    public FoodCookingDto addIngredient(@PathVariable Long id_recipe, @PathVariable Long id_food, @PathVariable Float quantity) {
-        FoodCooking foodCooking = new FoodCooking(quantity,foodDao.findOne(id_food),recipeDao.findOne(id_recipe));
+    public FoodCookingDto addIngredient(@PathVariable Long id_recipe, @PathVariable String food, @PathVariable Float quantity) {
+        FoodCooking foodCooking = new FoodCooking(quantity,foodDao.findOne(getIdFood(food)),recipeDao.findOne(id_recipe));
         foodCookingDao.save(foodCooking);
         return (new FoodCookingDto(foodCooking));
     }
 
     @GetMapping(value = "/{name}")
     public List<FoodCookingDto> getRecipeIngredient(@PathVariable String name) {
-        List<FoodCookingDto> auxfCd = foodCookingDao.findAll().stream().map(FoodCookingDto::new).collect(Collectors.toList());
-        return getfoodcooking(getIdRecipe(name),auxfCd);
+        List<FoodCooking> auxfCd = foodCookingDao.findAll();
+        return getfoodcooking(getIdRecipe(name),auxfCd).stream().map(FoodCookingDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/test/{name}")
-    public Long getRecipeIngredient1(@PathVariable String name) {
-        return getIdRecipe(name);
+    public Long getIdFood(String name) {
+        List<Food> foods = foodDao.findAll();
+        for(int i = 0 ; i < foods.size() ; i++) {
+            if (foods.get(i).getIntitule().equalsIgnoreCase(name)) {
+                return foods.get(i).getId();
+            }
+        }
+        return new Long(-1);
     }
 
     public Long getIdRecipe(String name) {
@@ -73,14 +80,14 @@ public class RecipeController {
         return new Long(-1);
     }
 
-    public List<FoodCookingDto> getfoodcooking(Long id, List<FoodCookingDto> foodCookingDtos) {
-        List<FoodCookingDto> res = new ArrayList<>();
-        for (int i = 0 ; i < res.size() ; i++) {
-            if (foodCookingDtos.get(i).getId() == id) {
-                res.add(foodCookingDtos.get(i));
+    public List<FoodCooking> getfoodcooking(Long id, List<FoodCooking> foodCookings) {
+        List<FoodCooking> result = new ArrayList<>();
+        for (FoodCooking foodCooking : foodCookings) {
+            if(foodCooking.getRecipe().getId() == id) {
+                result.add(foodCooking);
             }
         }
-        return res;
+        return result;
     }
 
 }
