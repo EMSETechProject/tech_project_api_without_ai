@@ -60,6 +60,18 @@ public class RecipeController {
         return getfoodcooking(getIdRecipe(name),auxfCd).stream().map(FoodCookingDto::new).collect(Collectors.toList());
     }
 
+    @DeleteMapping(value = "/{id}/delete")
+    public void delete(@PathVariable Long id) {
+        Recipe recipe = recipeDao.findOne(id);
+        recipeDao.delete(id);
+        List<FoodCooking> foodCookings = foodCookingDao.findAll();
+        for(int i = 0; i < foodCookings.size(); i++) {
+            if(foodCookings.get(i).getRecipe().getId() == id) {
+                foodCookingDao.delete(foodCookings.get(i).getId());
+            }
+        }
+    }
+
     public Long getIdFood(String name) {
         List<Food> foods = foodDao.findAll();
         for(int i = 0 ; i < foods.size() ; i++) {
