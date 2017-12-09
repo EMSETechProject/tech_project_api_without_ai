@@ -30,9 +30,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile 'mysql:mysql-connector-java'
-	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-	//compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 
 	compile 'io.jsonwebtoken:jjwt:0.7.0'
 	compile('org.springframework.boot:spring-boot-starter-web')
