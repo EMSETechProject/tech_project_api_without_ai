@@ -8,7 +8,7 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

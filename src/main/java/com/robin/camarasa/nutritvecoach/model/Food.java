@@ -6,7 +6,7 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 public class Food {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
