@@ -229,4 +229,6 @@ public class Food {
     public void setSucres(Float sucres) {
         this.sucres = sucres;
     }
+
+
 }
