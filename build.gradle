@@ -1,36 +1,43 @@
+
 buildscript {
 	ext {
-		springBootVersion = '1.5.7.RELEASE'
+		springBootVersion = '1.5.8.RELEASE'
 	}
 	repositories {
 		mavenCentral()
+		maven { url 'https://repo.spring.io/libs-milestone' }
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M5'
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 
-group = 'fr.emse.majeureinfo'
+group = 'com.robin.camarasa.nutritivecoach'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/libs-milestone" }
 }
 
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile 'mysql:mysql-connector-java'
+	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	//compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+
+	compile 'io.jsonwebtoken:jjwt:0.7.0'
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('org.springframework.boot:spring-boot-devtools')
-	compile('com.h2database:h2')
-	compile("mysql-connector-java")
-    testCompile ('com.ninja-squad:DbSetup:2.1.0')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'com.ninja-squad:DbSetup:2.1.0'
 	compile "com.heroku.sdk:heroku-jdbc:0.1.1"
-    compile ('junit:junit:4.12')
 }
