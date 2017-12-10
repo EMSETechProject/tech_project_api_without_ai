@@ -53,8 +53,8 @@ public class RecipeController {
         Recipe recipe = recipeDao.findOne(id_recipe);
         FoodCooking foodCooking = new FoodCooking(quantity,food1,recipe);
         foodCookingDao.save(foodCooking);
-        return (new FoodCookingDto(foodCooking));*/
-    }
+        return (new FoodCookingDto(foodCooking));
+    }*/
 
     @GetMapping(value = "/{name}")
     public List<FoodCookingDto> getRecipeIngredient(@PathVariable String name) {
