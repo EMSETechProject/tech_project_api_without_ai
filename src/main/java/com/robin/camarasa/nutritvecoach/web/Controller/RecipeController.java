@@ -46,7 +46,7 @@ public class RecipeController {
         return (new RecipeDto(recipe));
     }
 
-    /*@PostMapping(value = "/addingredient/{id_recipe}/{food}/{quantity}")
+    @PostMapping(value = "/addingredient/{id_recipe}/{food}/{quantity}")
     @ResponseStatus(HttpStatus.CREATED)
     public FoodCookingDto addIngredient(@PathVariable Long id_recipe, @PathVariable String food, @PathVariable Float quantity) {
         Food food1 = foodDao.findOne(getIdFood(food));
@@ -54,7 +54,7 @@ public class RecipeController {
         FoodCooking foodCooking = new FoodCooking(quantity,food1,recipe);
         foodCookingDao.save(foodCooking);
         return (new FoodCookingDto(foodCooking));
-    }*/
+    }
 
     @GetMapping(value = "/{name}")
     public List<FoodCookingDto> getRecipeIngredient(@PathVariable String name) {
