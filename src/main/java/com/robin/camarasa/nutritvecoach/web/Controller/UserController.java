@@ -49,7 +49,7 @@ public class UserController {
                 return (new UserConectionDto(users.get(i)));
             }
         }
-        users.get(0).setId(Long.parseLong("-1"))
+        users.get(0).setId(Long.parseLong("-1"));
         return (new UserConectionDto(users.get(0)));
 
     }
