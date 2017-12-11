@@ -47,7 +47,7 @@ public class UserController {
                 return (new UserConnectionDto(users.get(i).getId()));
             }
         }
-        return (new UserConnectionDto(-1l));
+        return (new UserConnectionDto(-2l));
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
