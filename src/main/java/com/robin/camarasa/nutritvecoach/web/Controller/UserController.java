@@ -4,15 +4,13 @@ import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
-import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
-import com.robin.camarasa.nutritvecoach.web.dto.UserConectionDto;
+import com.robin.camarasa.nutritvecoach.web.dto.UserConnectionDto;
 import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -42,16 +40,14 @@ public class UserController {
     }
 
     @GetMapping(value = "/{pseudo}/{password}")
-    public UserConectionDto checkconnection(@PathVariable String pseudo, @PathVariable String password) {
+    public UserConnectionDto checkconnection(@PathVariable String pseudo, @PathVariable String password) {
         List<User> users = userDao.findAll();
         for (int i = 0; i < users.size() ; i++) {
             if (users.get(i).getPassword().equalsIgnoreCase(pseudo) && users.get(i).getPseudo().equalsIgnoreCase(password)) {
-                return (new UserConectionDto(users.get(i)));
+                return (new UserConnectionDto(users.get(i).getId()));
             }
         }
-        users.get(0).setId(Long.parseLong("-1"));
-        return (new UserConectionDto(users.get(0)));
-
+        return (new UserConnectionDto(-1l));
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")

@@ -4,12 +4,16 @@ import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
 
 
-public class UserConectionDto {
+public class UserConnectionDto {
 
     private final Long id;
 
-    public UserConectionDto(User user) {
+    public UserConnectionDto(User user) {
         this.id = user.getId();
+    }
+
+    public UserConnectionDto(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
