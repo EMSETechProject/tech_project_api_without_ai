@@ -43,7 +43,7 @@ public class UserController {
     public UserConnectionDto checkconnection(@PathVariable String pseudo, @PathVariable String password) {
         List<User> users = userDao.findAll();
         for (int i = 0; i < users.size() ; i++) {
-            if (users.get(i).getPseudo().equalsIgnoreCase(password)) {
+            if (users.get(i).getPassword().equalsIgnoreCase(pseudo)) {
                 return (new UserConnectionDto(users.get(i).getId()));
             }
         }
