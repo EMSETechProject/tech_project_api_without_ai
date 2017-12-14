@@ -11,6 +11,7 @@ public class UserDto {
     private final String password;
     private final PhysicalData physicalData;
 
+
     public UserDto(User user) {
         this.id = user.getId();
         this.pseudo = user.getPseudo();
