@@ -34,6 +34,13 @@ public class UserController {
         return (new UserDto(userDao.getOne(userId)));
     }
 
+
+
+    @GetMapping(value = "/test")
+    public List<UserDto> test() {
+        return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
+    }
+
     @GetMapping(value = "/all")
     public List<UserDto> getall() {
         return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
