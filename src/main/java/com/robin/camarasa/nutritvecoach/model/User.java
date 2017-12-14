@@ -17,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne
+    @Column(nullable = false)
     private PhysicalData physicalData;
 
     @SuppressWarnings("unused")
