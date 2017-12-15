@@ -52,7 +52,7 @@ public class WeightController {
                 weights1.add(weight);
             }
         }
-        List<Weight> weights2 = weights1.subList(Math.max(0,weights1.size()-10),weights1.size()-1);
+        List<Weight> weights2 = weights.subList(Math.max(0,weights1.size()-10),weights1.size()-1);
         return weights2.stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
