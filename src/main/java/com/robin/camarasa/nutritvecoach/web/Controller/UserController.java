@@ -45,7 +45,7 @@ public class UserController {
         return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "finduser/{pseudo}/{password}")
+    @GetMapping(value = "/findbypp/{pseudo}/{password}")
     public UserConnectionDto checkconnection(@PathVariable String pseudo, @PathVariable String password) {
         List<User> users = userDao.findAll();
         for (int i = 0; i < users.size() ; i++) {
