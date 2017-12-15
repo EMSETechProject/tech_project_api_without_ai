@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,5 +41,18 @@ public class WeightController {
     @GetMapping(value = "/all")
     public List<WeightDto> getallWeights() {
         return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/findlastten/{id}")
+    public List<WeightDto> getLastTen(@PathVariable Long id) {
+        List<Weight> weights = weightDao.findAll();
+        List<Weight> weights1 = new ArrayList<>();
+        for (Weight weight : weights) {
+            if(weight.getId() == id) {
+                weights1.add(weight);
+            }
+        }
+        List<Weight> weights2 = weights1.subList(Math.max(0,weights1.size()-10),weights1.size());
+        return weights2.stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
