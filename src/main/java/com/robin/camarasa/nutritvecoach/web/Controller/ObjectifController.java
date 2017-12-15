@@ -23,9 +23,11 @@ import java.util.stream.Collectors;
 public class ObjectifController {
 
     private ObjectifDao objectifDao;
+    private UserDao userDao;
 
-    public ObjectifController(ObjectifDao objectifDao) {
+    public ObjectifController(ObjectifDao objectifDao, UserDao userDao) {
         this.objectifDao = objectifDao;
+        this.userDao = userDao;
     }
 
     @GetMapping(value = "/all")
@@ -47,7 +49,9 @@ public class ObjectifController {
 
     @PostMapping(value = "/add/{id_user}/{value}")
     public ObjectifDto add(@PathVariable Long id_user, @PathVariable Float value) {
-        Objectif objectif = objectifDao.getOne(id_user);
+        User user = userDao.getOne(id_user);
+        Objectif objectif = new Objectif(user,value);
+        objectifDao.save(objectif);
         return new ObjectifDto(objectif);
     }
 
