@@ -35,16 +35,9 @@ public class UserController {
         this.weightDao = weightDao;
     }
 
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/findbyid/{userId}")
     public UserDto get(@PathVariable Long userId) {
         return (new UserDto(userDao.getOne(userId)));
-    }
-
-
-
-    @GetMapping(value = "/test")
-    public List<UserDto> test() {
-        return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/all")
@@ -52,7 +45,7 @@ public class UserController {
         return userDao.findAll().stream().map(UserDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{pseudo}/{password}")
+    @GetMapping(value = "finduser/{pseudo}/{password}")
     public UserConnectionDto checkconnection(@PathVariable String pseudo, @PathVariable String password) {
         List<User> users = userDao.findAll();
         for (int i = 0; i < users.size() ; i++) {
@@ -80,7 +73,7 @@ public class UserController {
         return (new UserDto(user));
     }
 
-    @GetMapping(value = "/weights/all")
+    @GetMapping(value = "/weight/all")
     public List<WeightDto> getallWeights() {
         return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
     }

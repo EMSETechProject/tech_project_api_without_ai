@@ -46,7 +46,7 @@ public class RecipeController {
         return (new RecipeDto(recipe));
     }
 
-    @PostMapping(value = "/addingredient/{id_recipe}/{food}/{quantity}")
+    @PostMapping(value = "/ingredient/add/{id_recipe}/{food}/{quantity}")
     @ResponseStatus(HttpStatus.CREATED)
     public FoodCookingDto addIngredient(@PathVariable Long id_recipe, @PathVariable String food, @PathVariable Float quantity) {
         Food food1 = foodDao.getOne(getIdFood(food));
@@ -56,7 +56,7 @@ public class RecipeController {
         return (new FoodCookingDto(foodCooking));
     }
 
-    @GetMapping(value = "/{name}")
+    @GetMapping(value = "/findbyname/{name}")
     public List<FoodCookingDto> getRecipeIngredient(@PathVariable String name) {
         List<FoodCooking> auxfCd = foodCookingDao.findAll();
         return getfoodcooking(getIdRecipe(name),auxfCd).stream().map(FoodCookingDto::new).collect(Collectors.toList());
