@@ -48,7 +48,7 @@ public class WeightController {
         List<Weight> weights = weightDao.findAll();
         List<Weight> weights1 = new ArrayList<>();
         for (Weight weight : weights) {
-            if(weight.getId() == id) {
+            if(weight.getUser().getId() == id) {
                 weights1.add(weight);
             }
         }
