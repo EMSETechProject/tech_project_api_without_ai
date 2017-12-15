@@ -57,11 +57,16 @@ public class UserController {
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
-    public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
-        PhysicalData physicalData = physicalDataDao.getOne(id);
-        User user = new User(pseudo,password,physicalData);
-        userDao.save(user);
-        return (new UserDto(user));
+    public UserConnectionDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
+        try {
+            PhysicalData physicalData = physicalDataDao.getOne(id);
+            User user = new User(pseudo,password,physicalData);
+            userDao.save(user);
+            return (new UserConnectionDto(user));
+        }catch (Exception e) {
+            return (new UserConnectionDto(-1L));
+        }
+
     }
 
     @GetMapping(value = "/findbyp/{pseudo}")
