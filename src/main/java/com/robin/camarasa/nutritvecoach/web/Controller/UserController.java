@@ -64,5 +64,15 @@ public class UserController {
         return (new UserDto(user));
     }
 
+    @GetMapping(value = "/findbyp/{pseudo}")
+    public UserConnectionDto findbyp(@PathVariable String pseudo) {
+        List<User> users = userDao.findAll();
+        for (User user : users) {
+            if (user.getPseudo().equalsIgnoreCase(pseudo)) {
+                return new UserConnectionDto(user);
+            }
+        }
+        return new UserConnectionDto(-1L);
+    }
 
 }
