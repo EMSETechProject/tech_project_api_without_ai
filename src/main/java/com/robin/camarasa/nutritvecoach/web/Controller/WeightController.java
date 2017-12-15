@@ -49,6 +49,7 @@ public class WeightController {
         List<Boolean> userDtos = new ArrayList<>();
         List<Weight> weights = weightDao.findAll();
         List<Weight> weights1 = new ArrayList<>();
+        userDtos.add(id == 151);
         for (Weight weight : weights) {
             if(weight.getUser().getId() == id) {
 
