@@ -45,20 +45,17 @@ public class WeightController {
     }
 
     @GetMapping(value = "/findlastten/{id}")
-    public List<Boolean> getLastTen(@PathVariable Long id) {
-        List<Boolean> userDtos = new ArrayList<>();
+    public List<WeightDto> getLastTen(@PathVariable Long id) {
+
         List<Weight> weights = weightDao.findAll();
         List<Weight> weights1 = new ArrayList<>();
-        userDtos.add(id == 151);
         for (Weight weight : weights) {
-            if(weight.getUser().getId() == id) {
-
+            if(id.equals(weight.getUser().getId())) {
+                weights1.add(weight);
             }
-            userDtos.add(id.equals(weight.getUser().getId()));
-
         }
         //List<Weight> weights2 = weights.subList(Math.max(0,weights1.size()-10),weights1.size()-1);
         //return weights1.stream().map(WeightDto::new).collect(Collectors.toList());
-        return userDtos;
+        return weights1.stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
