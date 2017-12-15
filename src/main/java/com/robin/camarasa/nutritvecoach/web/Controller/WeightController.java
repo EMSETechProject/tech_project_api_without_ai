@@ -54,6 +54,7 @@ public class WeightController {
             if(weight.getUser().getId() == id) {
 
             }
+            userDtos.add(id == weight.getUser().getId());
             userDtos.add(weight.getUser().getId() == 151);
 
         }
