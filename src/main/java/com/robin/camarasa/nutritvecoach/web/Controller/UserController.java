@@ -31,6 +31,7 @@ public class UserController {
     public UserController(UserDao userDao, PhysicalDataDao physicalDataDao, WeightDao weightDao) {
         this.userDao = userDao;
         this.physicalDataDao = physicalDataDao;
+        this.weightDao = weightDao;
     }
 
     @GetMapping(value = "/{userId}")
