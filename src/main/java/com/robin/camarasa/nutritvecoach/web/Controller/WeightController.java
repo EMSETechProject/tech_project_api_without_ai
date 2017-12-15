@@ -49,7 +49,8 @@ public class WeightController {
         List<Weight> weights1 = new ArrayList<>();
         for (Weight weight : weights) {
             if(weight.getUser().getId() == id) {
-                weights1.add(weight);
+                return weights.stream().map(WeightDto::new).collect(Collectors.toList());
+                //weights1.add(weight);
             }
         }
         //List<Weight> weights2 = weights.subList(Math.max(0,weights1.size()-10),weights1.size()-1);
