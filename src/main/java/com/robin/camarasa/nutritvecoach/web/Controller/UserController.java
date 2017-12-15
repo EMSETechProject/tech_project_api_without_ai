@@ -82,7 +82,6 @@ public class UserController {
     }
 
     @GetMapping(value = "/weights/all")
-    @ResponseStatus(HttpStatus.CREATED)
     public List<WeightDto> getallWeights() {
         return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
     }
