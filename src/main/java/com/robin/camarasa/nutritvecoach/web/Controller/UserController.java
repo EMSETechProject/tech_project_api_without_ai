@@ -56,15 +56,6 @@ public class UserController {
         return (new UserConnectionDto(-1l));
     }
 
-    @PostMapping(value = "/add/weight/{id}/{value}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public WeightDto addWeight(@PathVariable Long id, @PathVariable Float value) {
-        User user = userDao.getOne(id);
-        Weight weight = new Weight(user,value);
-        weightDao.save(weight);
-        return (new WeightDto(weight));
-    }
-
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
     public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
         PhysicalData physicalData = physicalDataDao.getOne(id);
@@ -73,8 +64,5 @@ public class UserController {
         return (new UserDto(user));
     }
 
-    @GetMapping(value = "/weight/all")
-    public List<WeightDto> getallWeights() {
-        return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
-    }
+
 }

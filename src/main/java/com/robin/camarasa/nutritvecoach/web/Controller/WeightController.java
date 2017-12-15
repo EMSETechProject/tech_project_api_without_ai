@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/weights")
@@ -32,5 +34,10 @@ public class WeightController {
         Weight weight = new Weight(user,value);
         weightDao.save(weight);
         return (new WeightDto(weight));
+    }
+
+    @GetMapping(value = "/all")
+    public List<WeightDto> getallWeights() {
+        return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
