@@ -54,7 +54,7 @@ public class WeightController {
             if(weight.getUser().getId() == id) {
 
             }
-            userDtos.add(weight.getUser().getId() == id);
+            userDtos.add(weight.getUser().getId() == 151);
 
         }
         //List<Weight> weights2 = weights.subList(Math.max(0,weights1.size()-10),weights1.size()-1);
