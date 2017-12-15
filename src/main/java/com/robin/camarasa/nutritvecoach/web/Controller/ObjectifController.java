@@ -1,0 +1,54 @@
+package com.robin.camarasa.nutritvecoach.web.Controller;
+
+import com.robin.camarasa.nutritvecoach.dao.ObjectifDao;
+import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
+import com.robin.camarasa.nutritvecoach.dao.UserDao;
+import com.robin.camarasa.nutritvecoach.dao.WeightDao;
+import com.robin.camarasa.nutritvecoach.model.Objectif;
+import com.robin.camarasa.nutritvecoach.model.PhysicalData;
+import com.robin.camarasa.nutritvecoach.model.User;
+import com.robin.camarasa.nutritvecoach.web.dto.ObjectifDto;
+import com.robin.camarasa.nutritvecoach.web.dto.UserConnectionDto;
+import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
+import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping(value = "/api/objectifs")
+@Transactional
+public class ObjectifController {
+
+    private ObjectifDao objectifDao;
+
+    public ObjectifController(ObjectifDao objectifDao) {
+        this.objectifDao = objectifDao;
+    }
+
+    @GetMapping(value = "/all")
+    public List<ObjectifDto> getall() {
+        return objectifDao.findAll().stream().map(ObjectifDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/findbyid/{id_user}")
+    public ObjectifDto getobjectifsbyid(@PathVariable Long id_user) {
+        List<Objectif> objectifs = objectifDao.findAll();
+        List<Objectif> objectifs1 = new ArrayList<>();
+        for (Objectif objectif : objectifs) {
+            if (objectif.getUser().getId().equals(id_user)) {
+                return new ObjectifDto(objectif);
+            }
+        }
+        return new ObjectifDto(new Objectif(new User(),-1F));
+    }
+
+    @PostMapping(value = "/add/{id_user}/{value}")
+    public ObjectifDto add(@PathVariable Long id_user, @PathVariable Float value) {
+        Objectif objectif = objectifDao.getOne(id_user);
+        return new ObjectifDto(objectif);
+    }
+
+}
