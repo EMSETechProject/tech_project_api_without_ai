@@ -20,7 +20,7 @@ public class PhysicalDataController {
         this.physicalDataDao = physicalDataDao;
     }
 
-    @GetMapping(value = "/{physicalDataId}")
+    @GetMapping(value = "/findbyid/{physicalDataId}")
     public PhysicalDataDto get(@PathVariable Long physicalDataId) {
         return (new PhysicalDataDto(physicalDataDao.getOne(physicalDataId)));
     }
