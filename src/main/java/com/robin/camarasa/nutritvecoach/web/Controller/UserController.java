@@ -2,10 +2,13 @@ package com.robin.camarasa.nutritvecoach.web.Controller;
 
 import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.dao.UserDao;
+import com.robin.camarasa.nutritvecoach.dao.WeightDao;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
+import com.robin.camarasa.nutritvecoach.model.Weight;
 import com.robin.camarasa.nutritvecoach.web.dto.UserConnectionDto;
 import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
+import com.robin.camarasa.nutritvecoach.web.dto.WeightDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +23,12 @@ public class UserController {
 
     private final UserDao userDao;
     private final PhysicalDataDao physicalDataDao;
+    private final WeightDao weightDao;
     private PhysicalData physicalData;
     private User user;
 
 
-    public UserController(UserDao userDao, PhysicalDataDao physicalDataDao) {
+    public UserController(UserDao userDao, PhysicalDataDao physicalDataDao, WeightDao weightDao) {
         this.userDao = userDao;
         this.physicalDataDao = physicalDataDao;
     }
@@ -55,6 +59,14 @@ public class UserController {
             }
         }
         return (new UserConnectionDto(-1l));
+    }
+
+    @PostMapping(value = "/add/weight/{id}/{value}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public WeightDto addWeight(@PathVariable Long id, @PathVariable Float value) {
+        Weight weight = new Weight(userDao.getOne(id),value);
+        weightDao.save(weight);
+        return (new WeightDto(weight));
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
