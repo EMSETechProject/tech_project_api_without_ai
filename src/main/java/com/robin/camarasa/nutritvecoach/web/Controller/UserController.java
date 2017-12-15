@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,8 @@ public class UserController {
     @PostMapping(value = "/add/weight/{id}/{value}")
     @ResponseStatus(HttpStatus.CREATED)
     public WeightDto addWeight(@PathVariable Long id, @PathVariable Float value) {
-        Weight weight = new Weight(userDao.getOne(id),value);
+        User user = userDao.getOne(id);
+        Weight weight = new Weight(user,value);
         weightDao.save(weight);
         return (new WeightDto(weight));
     }
@@ -73,9 +75,15 @@ public class UserController {
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
-
-        User user = new User(pseudo,password,physicalDataDao.getOne(id));
+        PhysicalData physicalData = physicalDataDao.getOne(id);
+        User user = new User(pseudo,password,physicalData);
         userDao.save(user);
         return (new UserDto(user));
+    }
+
+    @GetMapping(value = "/weights/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<WeightDto> getallWeights() {
+        return weightDao.findAll().stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
