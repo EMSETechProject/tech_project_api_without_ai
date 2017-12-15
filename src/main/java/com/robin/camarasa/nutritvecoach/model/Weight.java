@@ -21,6 +21,7 @@ public class Weight {
 
     public Weight(User user, Float value) {
         this.value = value;
+        this.user = user;
     }
 
     public void setUser(User user) {

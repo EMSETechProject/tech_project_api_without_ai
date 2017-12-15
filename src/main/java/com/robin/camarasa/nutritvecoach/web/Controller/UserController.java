@@ -73,7 +73,6 @@ public class UserController {
     }
 
     @PostMapping(value = "/add/{pseudo}/{password}/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
     public UserDto add(@PathVariable String pseudo, @PathVariable String password, @PathVariable Long id) {
         PhysicalData physicalData = physicalDataDao.getOne(id);
         User user = new User(pseudo,password,physicalData);
