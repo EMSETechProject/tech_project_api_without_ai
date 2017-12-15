@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/physicaldatas")
@@ -31,5 +33,10 @@ public class PhysicalDataController {
         physicalData = new PhysicalData(age,weight,size);
         physicalDataDao.save(physicalData);
         return (new PhysicalDataDto(physicalData));
+    }
+
+    @GetMapping(value = "/all")
+    public List<PhysicalDataDto> getall() {
+        return physicalDataDao.findAll().stream().map(PhysicalDataDto::new).collect(Collectors.toList());
     }
 }
