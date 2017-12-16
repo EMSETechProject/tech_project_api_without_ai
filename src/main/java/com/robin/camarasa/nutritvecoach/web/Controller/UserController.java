@@ -111,7 +111,13 @@ public class UserController {
                                                     -1F)),
                                     -1F)));
         }
-
     }
 
+    @PostMapping(value = "/modify/{id}/{password}")
+    public UserDto change(@PathVariable Long id, @PathVariable String password) {
+        User user = userDao.getOne(id);
+        user.setPassword(password);
+        userDao.save(user);
+        return (new UserDto(user));
+    }
 }
