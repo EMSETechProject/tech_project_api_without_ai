@@ -81,12 +81,36 @@ public class UserController {
     @GetMapping(value = "/loaddata/{pseudo}/{password}")
     public UserFullDataDto getdata(@PathVariable String pseudo, @PathVariable String password) {
         ObjectifController objectifController = new ObjectifController(objectifDao,userDao);
-        UserConnectionDto userConnectionDto = this.checkconnection(pseudo,password);
-        UserDto userDto = this.get(userConnectionDto.getId());
-        User user = new User(userDto.getId(), pseudo,password,userDto.getPhysicalData());
-        ObjectifDto objectifDto = objectifController.getobjectifsbyid(user.getId());
-        Objectif objectif = new Objectif(objectifDto.getId(),user,objectifDto.getValue());
-        return (new UserFullDataDto(user,objectif));
+        UserConnectionDto userConnectionDto;
+        try {
+            userConnectionDto = this.checkconnection(pseudo,password);
+            UserDto userDto = this.get(userConnectionDto.getId());
+            User user = new User(userDto.getId(), pseudo,password,userDto.getPhysicalData());
+            ObjectifDto objectifDto = objectifController.getobjectifsbyid(user.getId());
+            Objectif objectif = new Objectif(objectifDto.getId(),user,objectifDto.getValue());
+            return (new UserFullDataDto(user,objectif));
+        } catch (Exception e) {
+            return (new UserFullDataDto(
+                        new User(
+                                -1L,
+                                "err",
+                                "err",
+                                new PhysicalData(
+                                        -1L,
+                                        -1,
+                                        -1F,
+                                        -1F)),
+                        new Objectif(-1L,
+                                    new User(
+                                            -1L,
+                                            "err",
+                                            "err",
+                                            new PhysicalData(-1L,
+                                                    -1,
+                                                    -1F,
+                                                    -1F)),
+                                    -1F)));
+        }
 
     }
 

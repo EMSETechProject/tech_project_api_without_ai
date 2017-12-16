@@ -28,6 +28,13 @@ public class PhysicalData {
         this.size = size;
     }
 
+    public PhysicalData(Long id, Integer age, Float weight, Float size) {
+        this.id = id;
+        this.age = age;
+        this.weight = weight;
+        this.size = size;
+    }
+
     public Float getSize() {
         return size;
     }
