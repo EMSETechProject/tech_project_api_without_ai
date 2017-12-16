@@ -48,13 +48,12 @@ public class WeightController {
     public List<WeightDto> getLastTen(@PathVariable Long id) {
 
         List<Weight> weights = weightDao.findAll();
-        List<Weight> weights1 = new ArrayList<>();
+        List<Weight> weights2 = new ArrayList<>();
         for (Weight weight : weights) {
             if(id.equals(weight.getUser().getId())) {
-                weights1.add(weight);
+                weights2.add(weight);
             }
         }
-        List<Weight> weights2 = weights1.subList(Math.max(0,weights1.size()-10),weights1.size());
         return weights2.stream().map(WeightDto::new).collect(Collectors.toList());
     }
 }
