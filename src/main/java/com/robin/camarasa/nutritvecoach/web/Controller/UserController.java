@@ -1,14 +1,14 @@
 package com.robin.camarasa.nutritvecoach.web.Controller;
 
+import com.robin.camarasa.nutritvecoach.dao.ObjectifDao;
 import com.robin.camarasa.nutritvecoach.dao.PhysicalDataDao;
 import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.dao.WeightDao;
+import com.robin.camarasa.nutritvecoach.model.Objectif;
 import com.robin.camarasa.nutritvecoach.model.PhysicalData;
 import com.robin.camarasa.nutritvecoach.model.User;
 import com.robin.camarasa.nutritvecoach.model.Weight;
-import com.robin.camarasa.nutritvecoach.web.dto.UserConnectionDto;
-import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
-import com.robin.camarasa.nutritvecoach.web.dto.WeightDto;
+import com.robin.camarasa.nutritvecoach.web.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,16 +23,14 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserDao userDao;
+    private final ObjectifDao objectifDao;
     private final PhysicalDataDao physicalDataDao;
-    private final WeightDao weightDao;
-    private PhysicalData physicalData;
-    private User user;
 
 
-    public UserController(UserDao userDao, PhysicalDataDao physicalDataDao, WeightDao weightDao) {
+    public UserController(UserDao userDao, ObjectifDao objectifDao, PhysicalDataDao physicalDataDao) {
         this.userDao = userDao;
+        this.objectifDao = objectifDao;
         this.physicalDataDao = physicalDataDao;
-        this.weightDao = weightDao;
     }
 
     @GetMapping(value = "/findbyid/{userId}")
@@ -78,6 +76,18 @@ public class UserController {
             }
         }
         return new UserConnectionDto(-1L);
+    }
+
+    @GetMapping(value = "/loaddata/{pseudo}/{password}")
+    public UserFullDataDto getdata(@PathVariable String pseudo, @PathVariable String password) {
+        ObjectifController objectifController = new ObjectifController(objectifDao,userDao);
+        UserConnectionDto userConnectionDto = this.checkconnection(pseudo,password);
+        UserDto userDto = this.get(userConnectionDto.getId());
+        User user = new User(userDto.getId(), pseudo,password,userDto.getPhysicalData());
+        ObjectifDto objectifDto = objectifController.getobjectifsbyid(user.getId());
+        Objectif objectif = new Objectif(objectifDto.getId(),user,objectifDto.getValue());
+        return (new UserFullDataDto(user,objectif));
+
     }
 
 }

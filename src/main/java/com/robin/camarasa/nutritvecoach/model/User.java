@@ -30,6 +30,13 @@ public class User {
         this.physicalData = physicalData;
     }
 
+    public User(Long id, String pseudo, String password, PhysicalData physicalData) {
+        this.id = id;
+        this.password = password;
+        this.pseudo = pseudo;
+        this.physicalData = physicalData;
+    }
+
     public Long getId() {
         return this.id;
     }

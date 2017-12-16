@@ -20,6 +20,12 @@ public class Objectif {
     public Objectif() {
     }
 
+    public Objectif(Long id, User user, Float value) {
+        this.id = id;
+        this.user = user;
+        this.value = value;
+    }
+
     public Objectif(User user, Float value) {
         this.user = user;
         this.value = value;
