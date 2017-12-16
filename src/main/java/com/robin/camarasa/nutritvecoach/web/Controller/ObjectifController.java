@@ -10,6 +10,7 @@ import com.robin.camarasa.nutritvecoach.model.User;
 import com.robin.camarasa.nutritvecoach.web.dto.ObjectifDto;
 import com.robin.camarasa.nutritvecoach.web.dto.UserConnectionDto;
 import com.robin.camarasa.nutritvecoach.web.dto.UserDto;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -66,7 +67,8 @@ public class ObjectifController {
         return new ObjectifDto(objectif);
     }
 
-    @DeleteMapping(value = "/modify/{id}/{value}")
+    @Modifying
+    @PostMapping(value = "/modify/{id}/{value}")
     public ObjectifDto change(@PathVariable Long id, @PathVariable Float value) {
         Objectif objectif = objectifDao.getOne(id);
         objectif.setValue(value);
