@@ -66,7 +66,7 @@ public class ObjectifController {
         return new ObjectifDto(objectif);
     }
 
-    @PostMapping(value = "/modify/{id}/{value}")
+    @DeleteMapping(value = "/modify/{id}/{value}")
     public ObjectifDto change(@PathVariable Long id, @PathVariable Float value) {
         Objectif objectif = objectifDao.getOne(id);
         objectif.setValue(value);
