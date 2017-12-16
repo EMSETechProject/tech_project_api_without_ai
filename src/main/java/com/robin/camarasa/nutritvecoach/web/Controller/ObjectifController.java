@@ -45,6 +45,7 @@ public class ObjectifController {
             }
         }
         return new ObjectifDto(new Objectif(
+                                        -1L,
                                         new User(
                                                 -1L,
                                                 "err",
