@@ -44,7 +44,17 @@ public class ObjectifController {
                 return new ObjectifDto(objectif);
             }
         }
-        return new ObjectifDto(new Objectif(new User(),-1F));
+        return new ObjectifDto(new Objectif(
+                                        new User(
+                                                -1L,
+                                                "err",
+                                                "err",
+                                                new PhysicalData(
+                                                                -1L,
+                                                                -1,
+                                                                -1F,
+                                                                -1F)),
+                                        -1F));
     }
 
     @PostMapping(value = "/add/{id_user}/{value}")
