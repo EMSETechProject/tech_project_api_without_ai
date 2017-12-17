@@ -88,8 +88,8 @@ public class RecipeController {
     }
 
     @GetMapping(value = "/ingredients/{id}")
-    public RecipeIngredientsDto getingredients(@PathVariable Long id){
-        Recipe recipe = recipeDao.getOne(id);
+    public List<FoodCookingLightDto> getingredients(@PathVariable Long id){
+        //Recipe recipe = recipeDao.getOne(id);
         List<FoodCooking> foodCookings = foodCookingDao.findAll();
         List<FoodCookingLightDto> result = new ArrayList<>();
         for(FoodCooking foodCooking : foodCookings) {
@@ -97,7 +97,7 @@ public class RecipeController {
                 result.add(new FoodCookingLightDto(foodCooking));
             }
         }
-        return (new RecipeIngredientsDto(recipe,result));
+        return result;
     }
 
     public Long getIdFood(String name) {
