@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -52,6 +53,15 @@ public class WeightController {
         for (Weight weight : weights) {
             if(id.equals(weight.getUser().getId())) {
                 weights2.add(weight);
+            }
+        }
+        for (int i = 0 ; i < weights2.size() ; i++) {
+            for (int j = i+1 ; j < weights2.size() ; j++) {
+                if(weights2.get(j).getId() < weights2.get(i).getId()) {
+                    Weight tmp = weights2.get(j);
+                    weights2.set(j, weights2.get(i));
+                    weights2.set(i, tmp);
+                }
             }
         }
         return weights2.stream().map(WeightDto::new).collect(Collectors.toList());
