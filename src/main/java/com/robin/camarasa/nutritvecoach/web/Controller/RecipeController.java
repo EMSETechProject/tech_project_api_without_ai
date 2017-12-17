@@ -88,9 +88,9 @@ public class RecipeController {
     }
 
     @GetMapping(value = "/ingredients/{id}")
-    public List<FoodCookingDto> getIng(@PathVariable Long id) {
+    public List<FoodCookingLightDto> getIng(@PathVariable Long id) {
         List<FoodCooking> foodCookings = foodCookingDao.findAll();
-        return getfoodcooking(id,foodCookings).stream().map(FoodCookingDto::new).collect(Collectors.toList());
+        return getfoodcooking(id,foodCookings).stream().map(FoodCookingLightDto::new).collect(Collectors.toList());
     }
 
     public Long getIdFood(String name) {
