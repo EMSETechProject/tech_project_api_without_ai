@@ -8,7 +8,9 @@ import com.robin.camarasa.nutritvecoach.model.Food;
 import com.robin.camarasa.nutritvecoach.model.FoodCooking;
 import com.robin.camarasa.nutritvecoach.model.Recipe;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
+import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingLightDto;
 import com.robin.camarasa.nutritvecoach.web.dto.RecipeDto;
+import com.robin.camarasa.nutritvecoach.web.dto.RecipeIngredientsDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,6 +85,19 @@ public class RecipeController {
         meal.add(main_course);
         meal.add(dessert);
         return meal.stream().map(RecipeDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/ingredients/{id}")
+    public RecipeIngredientsDto getingredients(@PathVariable Long id){
+        Recipe recipe = recipeDao.getOne(id);
+        List<FoodCooking> foodCookings = foodCookingDao.findAll();
+        List<FoodCookingLightDto> result = new ArrayList<>();
+        for(FoodCooking foodCooking : foodCookings) {
+            if (foodCooking.getRecipe().getId().equals(id)) {
+                result.add(new FoodCookingLightDto(foodCooking));
+            }
+        }
+        return (new RecipeIngredientsDto(recipe,result));
     }
 
     public Long getIdFood(String name) {
