@@ -78,7 +78,7 @@ public class RecipeController {
             } else if (recipes.get(0).getType() == 2) {
                 appetizer = recipes.get(0);
             } else {
-                return meal;
+                return meal.stream().map(RecipeDto::new).collect(Collectors.toList());
             }
         }
         meal.add(appetizer);
