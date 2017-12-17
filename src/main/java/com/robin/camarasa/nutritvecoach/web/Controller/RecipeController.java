@@ -67,7 +67,7 @@ public class RecipeController {
         Recipe main_course = new Recipe();
         Recipe dessert = new Recipe();
         Collections.shuffle(recipes);
-        while (appetizer.getId() == null && main_course.getId() == null && dessert.getId() == null) {
+        while (appetizer.getId() == null || main_course.getId() == null || dessert.getId() == null) {
             Collections.shuffle(recipes);
             if(recipes.get(0).getType() == 0) {
                 appetizer = recipes.get(0);
