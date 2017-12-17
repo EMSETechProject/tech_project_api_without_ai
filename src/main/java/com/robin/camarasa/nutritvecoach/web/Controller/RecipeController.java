@@ -3,17 +3,20 @@ package com.robin.camarasa.nutritvecoach.web.Controller;
 import com.robin.camarasa.nutritvecoach.dao.FoodCookingDao;
 import com.robin.camarasa.nutritvecoach.dao.FoodDao;
 import com.robin.camarasa.nutritvecoach.dao.RecipeDao;
+import com.robin.camarasa.nutritvecoach.dao.UserDao;
 import com.robin.camarasa.nutritvecoach.model.Food;
 import com.robin.camarasa.nutritvecoach.model.FoodCooking;
 import com.robin.camarasa.nutritvecoach.model.Recipe;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
-import com.robin.camarasa.nutritvecoach.web.dto.FoodDto;
 import com.robin.camarasa.nutritvecoach.web.dto.RecipeDto;
+import com.robin.camarasa.nutritvecoach.web.dto.RecipeIngredientsDto;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +28,14 @@ public class RecipeController {
     private final RecipeDao recipeDao;
     private final FoodCookingDao foodCookingDao;
     private final FoodDao foodDao;
+    private final UserDao userDao;
 
 
-    public RecipeController(RecipeDao recipeDao, FoodCookingDao foodCookingDao, FoodDao foodDao) {
+    public RecipeController(RecipeDao recipeDao, FoodCookingDao foodCookingDao, FoodDao foodDao, UserDao userDao) {
         this.recipeDao = recipeDao;
         this.foodCookingDao = foodCookingDao;
         this.foodDao = foodDao;
+        this.userDao = userDao;
     }
 
     @GetMapping(value = "/all")
@@ -54,6 +59,32 @@ public class RecipeController {
         FoodCooking foodCooking = new FoodCooking(quantity,food1,recipe);
         foodCookingDao.save(foodCooking);
         return (new FoodCookingDto(foodCooking));
+    }
+
+    @GetMapping(value = "/meal/{id_user}")
+    public List<RecipeDto> getmeal(@PathVariable Long id_user) {
+        List<Recipe> meal = new ArrayList<>();
+        List<Recipe> recipes = recipeDao.findAll();
+        Recipe appetizer = null;
+        Recipe main_course = null;
+        Recipe dessert = null;
+        Collections.shuffle(recipes);
+        while (appetizer.equals(null) && main_course.equals(null) && dessert.equals(null)) {
+            Collections.shuffle(recipes);
+            if(recipes.get(0).getType() == 0) {
+                appetizer = recipes.get(0);
+            } else if(recipes.get(0).getType() == 1) {
+                appetizer = recipes.get(0);
+            } else if (recipes.get(0).getType() == 2) {
+                appetizer = recipes.get(0);
+            } else {
+                return meal;
+            }
+        }
+        meal.add(appetizer);
+        meal.add(main_course);
+        meal.add(dessert);
+        return meal.stream().map(RecipeDto::new).collect(Collectors.toList());
     }
 
     public Long getIdFood(String name) {
