@@ -39,12 +39,27 @@ public class FoodController {
         return selectfoodcat(cat,foodDao.findAll());
     }
 
+    @GetMapping(value = "/catfulldata/{cat}")
+    public List<FoodDto> getfooddatafromcat(@PathVariable String cat) {
+        return selectfoodcatfulldata(cat,foodDao.findAll());
+    }
+
 
     public List<FoodnameDto> selectfoodcat(String foodcatDto, List<Food> foods) {
         List<FoodnameDto> res = new ArrayList<>();
         for (int i = 0 ; i < foods.size() ; i++) {
             if(foods.get(i).getCategorie().equalsIgnoreCase(foodcatDto)) {
                 res.add(new FoodnameDto(foods.get(i)));
+            }
+        }
+        return res;
+    }
+
+    public List<FoodDto> selectfoodcatfulldata(String foodcatDto, List<Food> foods) {
+        List<FoodDto> res = new ArrayList<>();
+        for (int i = 0 ; i < foods.size() ; i++) {
+            if(foods.get(i).getCategorie().equalsIgnoreCase(foodcatDto)) {
+                res.add(new FoodDto(foods.get(i)));
             }
         }
         return res;
@@ -64,4 +79,6 @@ public class FoodController {
         }
         return res;
     }
+
+
 }
