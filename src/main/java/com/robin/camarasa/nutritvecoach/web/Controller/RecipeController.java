@@ -120,7 +120,7 @@ public class RecipeController {
     public List<FoodCooking> getfoodcooking(Long id, List<FoodCooking> foodCookings) {
         List<FoodCooking> result = new ArrayList<>();
         for (FoodCooking foodCooking : foodCookings) {
-            if(foodCooking.getRecipe().getId() == id) {
+            if(foodCooking.getRecipe().getId().equals(id)) {
                 result.add(foodCooking);
             }
         }
