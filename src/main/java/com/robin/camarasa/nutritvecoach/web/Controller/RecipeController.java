@@ -92,11 +92,12 @@ public class RecipeController {
         //Recipe recipe = recipeDao.getOne(id);
         List<FoodCooking> foodCookings = foodCookingDao.findAll();
         List<FoodCookingLightDto> result = new ArrayList<>();
-        for(FoodCooking foodCooking : foodCookings) {
+        result.add(new FoodCookingLightDto(foodCookings.get(0)));
+        /*for(FoodCooking foodCooking : foodCookings) {
             if (foodCooking.getRecipe().getId().equals(id)) {
                 result.add(new FoodCookingLightDto(foodCooking));
             }
-        }
+        }*/
         return result;
     }
 
