@@ -43,8 +43,8 @@ public class RecipeController {
     }
 
     @GetMapping(value = "/fall")
-    public List<FoodCookingLightDto> getallingredients() {
-        return foodCookingDao.findAll().stream().map(FoodCookingLightDto::new).collect(Collectors.toList());
+    public List<FoodCookingDto> getallingredients() {
+        return foodCookingDao.findAll().stream().map(FoodCookingDto::new).collect(Collectors.toList());
     }
 
     @PostMapping(value = "/add/{name}/{type}")
