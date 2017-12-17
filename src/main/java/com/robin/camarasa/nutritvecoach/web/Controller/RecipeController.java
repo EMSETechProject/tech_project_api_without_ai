@@ -9,8 +9,6 @@ import com.robin.camarasa.nutritvecoach.model.FoodCooking;
 import com.robin.camarasa.nutritvecoach.model.Recipe;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
 import com.robin.camarasa.nutritvecoach.web.dto.RecipeDto;
-import com.robin.camarasa.nutritvecoach.web.dto.RecipeIngredientsDto;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,9 +63,9 @@ public class RecipeController {
     public List<RecipeDto> getmeal(@PathVariable Long id_user) {
         List<Recipe> meal = new ArrayList<>();
         List<Recipe> recipes = recipeDao.findAll();
-        Recipe appetizer = null;
-        Recipe main_course = null;
-        Recipe dessert = null;
+        Recipe appetizer = new Recipe();
+        Recipe main_course = new Recipe();
+        Recipe dessert = new Recipe();
         Collections.shuffle(recipes);
         while (appetizer.equals(null) && main_course.equals(null) && dessert.equals(null)) {
             Collections.shuffle(recipes);
