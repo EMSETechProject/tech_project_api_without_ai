@@ -28,6 +28,17 @@ public class FoodController {
         return foodDao.findAll().stream().map(FoodDto::new).collect(Collectors.toList());
     }
 
+    @GetMapping(value = "/findbyname/{name}")
+    public FoodDto getfood(@PathVariable String name) {
+        List<Food> foods = foodDao.findAll();
+        for (Food food : foods) {
+            if(food.getIntitule().equalsIgnoreCase(name)) {
+                return (new FoodDto(food));
+            }
+        }
+        return (new FoodDto(new Food()));
+    }
+
     @GetMapping(value = "/cat")
     public List<FoodcatDto> getfoodcat() {
         List<FoodcatDto> allcat = foodDao.findAll().stream().map(FoodcatDto::new).collect(Collectors.toList());
