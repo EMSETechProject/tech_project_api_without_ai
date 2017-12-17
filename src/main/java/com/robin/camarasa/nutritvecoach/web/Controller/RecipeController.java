@@ -72,9 +72,9 @@ public class RecipeController {
             if(recipes.get(0).getType() == 0) {
                 appetizer = recipes.get(0);
             } else if(recipes.get(0).getType() == 1) {
-                appetizer = recipes.get(0);
+                main_course = recipes.get(0);
             } else if (recipes.get(0).getType() == 2) {
-                appetizer = recipes.get(0);
+                dessert = recipes.get(0);
             } else {
                 return meal.stream().map(RecipeDto::new).collect(Collectors.toList());
             }
