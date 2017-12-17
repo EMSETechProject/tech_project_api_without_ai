@@ -10,7 +10,6 @@ import com.robin.camarasa.nutritvecoach.model.Recipe;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingDto;
 import com.robin.camarasa.nutritvecoach.web.dto.FoodCookingLightDto;
 import com.robin.camarasa.nutritvecoach.web.dto.RecipeDto;
-import com.robin.camarasa.nutritvecoach.web.dto.RecipeIngredientsDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +40,11 @@ public class RecipeController {
     @GetMapping(value = "/all")
     public List<RecipeDto> getallrecipes() {
         return recipeDao.findAll().stream().map(RecipeDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/fall")
+    public List<FoodCookingLightDto> getallingredients() {
+        return foodCookingDao.findAll().stream().map(FoodCookingLightDto::new).collect(Collectors.toList());
     }
 
     @PostMapping(value = "/add/{name}/{type}")
