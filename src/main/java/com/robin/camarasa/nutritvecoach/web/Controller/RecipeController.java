@@ -48,6 +48,7 @@ public class RecipeController {
         Recipe recipe = new Recipe(name,type);
         recipeDao.save(recipe);
         return (new RecipeDto(recipe));
+
     }
 
     @PostMapping(value = "/ingredient/add/{id_recipe}/{food}/{quantity}")
