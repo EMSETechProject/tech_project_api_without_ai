@@ -42,11 +42,6 @@ public class RecipeController {
         return recipeDao.findAll().stream().map(RecipeDto::new).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/fall")
-    public List<FoodCookingDto> getallingredients() {
-        return foodCookingDao.findAll().stream().map(FoodCookingDto::new).collect(Collectors.toList());
-    }
-
     @PostMapping(value = "/add/{name}/{type}")
     @ResponseStatus(HttpStatus.CREATED)
     public RecipeDto addRecipe(@PathVariable String name, @PathVariable Long type) {
